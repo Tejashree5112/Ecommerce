@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% comment %} templates/products/product_list.html {% endcomment %}
+{% block title %} Products {% endblock title%} 
+{% block content %} 
+{% for product in products %}
+<div class="card" style="width: 18rem">
+    {% if product.thumbnail %}
+  <img
+    class="card-img-top"
+    src="{{ product.thumbnail.url }}"
+    alt="Card image cap"
+  />
+{% else %}
+  <!-- Display a default image or a message if no thumbnail is available -->
+  <img
+    class="card-img-top"
+    src="/media/image.jpg"
+    alt="Card image cap"
+  />
+{% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">{{product.desc}}</p>
+    <a
+      href="{% url 'products:product-detail' product.id %}"
+      class="btn btn-primary"
+      >View Detail</a
+    >
+  </div>
+</div>
+
+{% endfor %} 
+{% endblock content %}
